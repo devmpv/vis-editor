@@ -1,20 +1,41 @@
+#### Version: 0.4.0-SNAPSHOT (LibGDX 1.9.5, Artemis 2.0.0)
+- Updated to LibGDX 1.9.5 and Artemis 2.0.0
+
+#### Version: 0.3.4 (LibGDX 1.9.3, Artemis 1.3.1)
+- **Fixed**: [#204](https://github.com/kotcrab/vis-editor/issues/205) - `dispose()` method not called on system when unloading `Scene` from `AssetManager`
+- **Changed**: [#205](https://github.com/kotcrab/vis-editor/issues/204) - `SystemProvider`s are now called form OpenGL thread
+- Physics body will be created for points (in VisEditor `Edit -> Add New -> Point`, then add `PhysicsProperties` and `Polygon` components)
+- **API Changed**: Renamed `PhysicsSprite` to `OriginalRotation`
+
+#### Version: 0.3.3 (LibGDX 1.9.3, Artemis 1.3.1)
+- GWT platform is no longer officially supported
+- **Added**: `EntityComposer` API - simplifies building VisRuntime entities
+- **Added**: Sprite sheet animation support
+- **Removed deprecated API**: `SceneConfig#addSystem(BaseSystem system)`, `SceneConfig#addSystem(BaseSystem system, int priority)` and `SimpleSystemProvider` (see 0.3.1 release notes for migration steps)
+- **Changed**: Spriter was removed from core and is now available as separate plugin
+ - No changes should be necessary except adding new Gradle dependency (`vis-runtime-spriter`) and changing imports declaration
+ - After adding runtime dependency register Spriter support with `visAssetManager.registerSupport(new SpriterSupport());`
+ - `SceneFeature#INFLATER_SPRITER` and `SPRITER_RENDER_SYSTEM` were removed, simply don't use register plugin if you don't want to use those
+- **Removed**: `RuntimeConfiguration#removeAssetsComponentAfterInflating` - asset reference component will be always retained
+
 #### Version: 0.3.2 (LibGDX 1.9.3, Artemis 1.3.1)
-- Updated to LibGDX 1.9.2
+- Updated to LibGDX 1.9.3
+- Updated Spine plugin to use spine-libgdx-runtime 3.2.0
 - **Fixed**: Changing entity tint could affect tint of all entities 
 - **Fixed**: FitViewport was not applied when rendering
 - **Fixed**: Spine runtime was not allowing not use multiple instances of same animation with different scales
     - To get `SpineAsset` assets from `AssetManager` use `spineAsset.getArbitrarySkeletonPath()` instead of `spineAsset.getSkeletonPath()`
-- **API Addition**: `Scene#getPixelsPerUnit()`
+- **API Addition**: `Scene#getPixelsPerUnit()`, `#getWidth()`, `#getHeight()`
 - **API Addition**: `Tint#set(int rgba)`, `Tint#set(float r, float g, float b, float a)`, `Tint#set(Tint other)` 
 - **API Addition**: constructor `VisSpriter (Loader<Sprite> loader, Data data, float scale, int entityIndex)`
 
 #### Version: 0.3.1 (LibGDX 1.9.2, Artemis 1.3.1)
 - Updated to LibGDX 1.9.2 and Artemis 1.3.1
 - **API Deprecated**: `SceneConfig#addSystem(BaseSystem system)`, `SceneConfig#addSystem(BaseSystem system, int priority)` and `SimpleSystemProvider`
-    - Use `SceneConfig#addSystem(Class<? extends BaseSystem> system)` and `SceneConfig#Class<? extends BaseSystem> systemClass, int priority`
+    - Use `SceneConfig#addSystem(Class<? extends BaseSystem> system)` and `SceneConfig#addSystem(Class<? extends BaseSystem> systemClass, int priority)`
     - Adding system in 0.3.0: `parameter.config.addSystem(new MySystem())`
     - Adding system now: `parameter.config.addSystem(MySystem.class)`
-    - If you need to pass custom arguments to system constructor implement `SystemProvider` directly.
+    - If you need to pass custom arguments to system constructor implement `SystemProvider` interface directly.
 - **API Change**: `Variables#variables` field is now final
 - **API Change**: `SceneConfig.Priority` is now an enum (should not require any code change)
 - **API Changes in `EntitySupport`**:

@@ -1,3 +1,23 @@
+#### Version: 0.4.0-SNAPSHOT
+- **Fixed**: [#228](https://github.com/kotcrab/vis-editor/issues/228) - arrows keys were not disabled when editing text field causing camera to move
+
+#### Version: 0.3.4
+- **Improved**: Double clicking entity in scene outline will center camera on it
+- **Improved**: Outline now shows entity id
+- **Improved**: Added support for Spine entities requiring PolygonSpriteBatch
+- **Added**: Camera can be moved using arrows keys
+- **Added**: Camera zoom can be changed using `,` and `.` keys
+- **Fixed**: Crash when sprite sheet animation is not set
+- **Fixed**: Possible crash when opening scene
+- **Changed**: Updated Spine runtime to latest version
+
+#### Version: 0.3.3
+- **Improved**: Improved performance when performing select all on more than 2000 entities
+- **Improved**: Improved performance when pasting entities
+- **Added**: Sprite sheet animation support
+- **Added**: Option in default exporter to change texture filter mode which will be used for packaged scene textures
+- **Changed**: Spriter support was moved to built-in plugin, if your project uses Spriter go to Plugins settings and enable Spriter integration
+
 #### Version: 0.3.2
 - **Improved**: Texture cache speed improved - new texture are available immediately after they are added to project assets. Fixes issues when large textures were loading infinitely.
 - **Improved**: Entity Properties will now show when field is locked and can't be edited
@@ -5,6 +25,7 @@
 - **Improved**: If some scene assets are missing then dialog with missing files list will be showed 
 - **Added**: [#58](https://github.com/kotcrab/vis-editor/issues/58) - Polygon auto tracing (available via Polygon Tool)
 - **Added**: Crash and internal exception reporter
+- **Added**: Option in default exporter to package separate texture atlas for each scene
 - **Fixed**: [#130](https://github.com/kotcrab/vis-editor/issues/130) - Exit dialog not showed on non Windows OSes
 - **Fixed**: Unable to open variables settings dialog for newly created scenes
 - **Fixed**: Minor bug: tabs panel wrong height

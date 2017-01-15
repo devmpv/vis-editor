@@ -1,3 +1,119 @@
+#### Version: 1.3.0 (LibGDX 1.9.5)
+- **Added**: `VisUI#dispose (boolean disposeSkin)`
+- Updated to libGDX 1.9.5
+- Excluded `AsyncTask` API from GWT compilation
+
+#### Version: 1.2.5 (LibGDX 1.9.4)
+- **Added**: `AsyncTask` API and `AsyncTaskProgressDialog`
+- **Added**: `PopupMenu.removeEveryMenu(Stage)`
+- **Added**: `FileChooser#setShowSelectionCheckboxes`
+- **Added**: `FileChooser#getIconProvider`
+- **Added**: `Spinner#setDisabled(boolean)`, `Spinner#isDisabled()`
+- **Added**: `HorizontalCollapsibleWidget`
+- **Fixed**: `MultiSplitPane#setSplit` not affecting split values
+- **Fixed**: `MultiSplitPane` and `VisSplitPane` default cursor not restored when mouse exited widget bounds when mouse was still on split handle bar 
+- **Changed**: Selection of menu item is removed when mouse pointer leaves popup menu structure
+- **I18N Changes**:
+   - Added `Common` bundle
+
+#### Version: 1.2.4 (LibGDX 1.9.4)
+- **Added**: `ListSelection#setListener`, `#setProgrammaticChangeEvents` (with getters)
+- **Fixed**: `Spinner.TextFieldEventPolicy` is now public (was package-private)
+- **Fixed**: `HighlightTextArea` scroll pane not immediately updated after changing text using `setText()`
+- **Improved**: [#220](https://github.com/kotcrab/vis-editor/issues/220) when sub menu can't fit on the right side of parent menu, it will be shown on the side that has more available space (before in such case it was always shown on the left side)
+- **Improved**: When mouse is moved from sub-menu to parent menu, selection of menu item in sub-menu will be removed.
+- **Improved**: [#222](https://github.com/kotcrab/vis-editor/issues/222) Added clipping to BusyBar
+- **Skin changes**:
+   - **Added style**: `ListViewStyle` - allows to customize `ListView` scroll pane style
+   - **Added new icons**: `icon-maximize`, `icon-minimize`, `icon-restore`, `icon-close-titlebar`
+   - **Added style**: `VisImageButtonStyle`: `close-titlebar`
+
+#### Version: 1.2.3 (LibGDX 1.9.4)
+- **Added**: constructor `LinkLabel (CharSequence text, CharSequence url, LinkLabelStyle style)`
+- **Fixed**: Spinner could overflow Table cell bounds by 1 pixel
+ - Removed `Sizes.spinnerButtonsWidth` and `Sizes.spinnerFieldRightPadding` (no longer needed)
+ - Renamed `Sizes.spinnerButtonSize` to `Sizes.spinnerButtonHeight`
+- **Skin changes**:
+ - Styles that used to reference other style by name (for example `FileChooserStyle` referencing `PopupMenu` style name) now embeds that style directly
+   - Changed `String ToastStyle#closeButtonStyleName` to `VisImageButtonStyle ToastStyle#closeButtonStyle`
+   - Changed `String FileChooserStyle#popupMenuStyleName` to `PopupMenuStyle FileChooserStyle#popupMenuStyle`
+   - Changed `String MenuStyle#openButtonStyleName` to `VisTextButtonStyle MenuStyle#openButtonStyle`
+   - For existing JSON files you only need to remove 'Name' postfix from field name, Skin loading mechanism can automatically resolve such references
+
+#### Version: 1.2.2 (LibGDX 1.9.4)
+- **Fixed**: [#214](https://github.com/kotcrab/vis-editor/issues/214) minus sign not visible in Spinner when value was changed with text field focus
+- **Fixed**: When there was not enough space on the right to fully show sub-menu it was appearing in wrong position on the left side.
+
+#### Version: 1.2.1 (LibGDX 1.9.4)
+- **Fixed**: When using libGDX 1.9.4 message was printed that libGDX version is incorrect. If your project is using 1.9.4 you could safely ignore it.
+
+#### Version: 1.2.0 (LibGDX 1.9.4)
+- Updated to LibGDX 1.9.4
+
+#### Version: 1.1.6 (LibGDX 1.9.3)
+- **Added**: `MenuBar#setMenuListener`, `MenuBarListener`
+- **Changed**: Spinner by default will fire change event after text field has lost focus, this can be changed. See `Spinner#setTextFieldEventPolicy` and `Spinner#TextFieldEventPolicy`.
+   - Use `TextFieldEventPolicy.ON_ENTER_ONLY` to preserve old behaviour
+- **Changed**: `FileChooser` will auto focus file list scroll pane when added to stage (use `FileChooser.focusFileScrollPaneOnShow` to override this setting)
+- **Fixed**: [#207](https://github.com/kotcrab/vis-editor/issues/207) crash when user has placed text field cursor after last letter (possibly on LWJGL backend only)
+
+#### Version: 1.1.5 (LibGDX 1.9.3)
+- **API Changed**: `VisTextField#setCurosrAtTextEnd` renamed to `setCursorAtTextEnd` (typo)
+- **Added**: `Tooltip#getTarget`
+- **Added**: `MenuItem` constructors taking style name
+- **Changed**: It's now impossible to create `FileTypeFilter` `Rule` without providing at least one extension
+- **Changed**: `FileTypeFilter` select box won't be shown when `FileChooser` `SelectionMode` is set to `DIRECTORIES`
+- **Changed**: `FileChooser` now can be closed by pressing enter when file name field has focus
+- **Changed**: `Dialogs#showOKDialog` can be closed using enter and escape key
+- **Changed**: [#176 (comment)](https://github.com/kotcrab/vis-editor/issues/176#issuecomment-237046516) - `FileChooser` path text field will now show end of the path when it's too long
+- **Changed**: `FileChooser` will fallback to default directory when `setDirectory` is called with invalid file handle (either non existing path or pointing to file)
+   - Fixes possible crash when current directory is removed while it's open in file chooser
+   - Removed protected `handleAsyncError`, no longer needed
+
+#### Version: 1.1.4 (LibGDX 1.9.3)
+- **Added**: `BusyBar` - used to indicate that background work is going on - see `TestBusyBar`
+- **Added**: `MultiSplitPane` - similar to `VisSplitPane` but supports multiple widgets at once
+- **Added**: `Tooltip.Builder#width()`, `Tooltip#setText(String)`, `Tooltip#getContentCell()`
+- **Changed**: `FileChooser` directory listing is now performed on separate thread to prevent application hanging when accessing unresponsive drive
+- **Changed**: When `ColorPicker` is canceled previous color is restored after window fade out have been finished to avoid flickering (listeners are not affected by this change)
+- **Fixed**: `PopupMenu` with single item is now accessible using keyboard
+- **Fixed**: `TabbedPane` unable to move tab to the last position in pane
+- **Skin changes**:
+   - **Added**: `TabbedPane` added style: `vertical`
+
+#### Version: 1.1.3 (LibGDX 1.9.3)
+- **API Changed**: `FileChooser.setSaveLastDirectory` is now static and must be called before creating chooser to properly restore saved directory.
+ - Last directory will not be saved when user has canceled selection dialog
+- **Changed**: `VisWindow#fadeOut` will reset alpha back to 1f after completing action.
+
+#### Version: 1.1.2 (LibGDX 1.9.3)
+- **Added**: `CursorManager`
+- **Added**: `ScrollableTextArea` and `HighlightTextArea` with `Highlighter` API
+- **Added**: `VisTextField#setCurosrAtTextEnd()`, `#getProgrammaticChangeEvents()`
+- **Added**: `FileChooser` file sorting options available under right click menu
+- **Added**: `FileChooser#setSorting(FileSorting)` and `#setSortingOrderAscending` along with appropriate getters
+- **Added**: `FileChooser#setSaveLastDirectory` - allows to automatically remember last directory user browsed between app launches, disabled by default
+- **Fixed**: VisSplitPane was not restoring default cursor when user dragged pointer outside od pane area 
+- **Fixed**: [#188](https://github.com/kotcrab/vis-editor/issues/188) - same instance of `VisDialog` couldn't be closed for the second time using close button 
+- **Fixed**: `FileChooser` NPE when user right clicked last file item after deleting all others files
+- **Fixed**: `FileChooser` Duplicated instances of same disk could be visible on list when chooser was displayed right after creating
+- **Fixed**: [#196](https://github.com/kotcrab/vis-editor/issues/196) - `ColorPicker` sending old color to listener instead of new
+- **Changed**: `FileChooser` in save mode with active file type filter rule will automatically append rule extensions if user have't typed extension or extension was wrong
+- **Changed**: `FileChooser` now shows files modified date when using details view mode
+- **Changed**: `FileChooser` will no longer show files when selection mode is `DIRECTORIES` - this behaviour can be changed in `DefaultFileFilter`
+- **Changed**: When `VisWindow#fadeOut()` is called then window touchable is set to disabled. Additionally keyboard focus is reset if any window child `Actor` owns keyboard focus.
+   - This is done to prevent user input after fade out animation has started.
+   - After fade out has finished window touchable property will be restored to previous value which was set before fade out started.
+- **Skin changes**:
+   - **Added**: `VisTextArea` added style: `textArea` - no background drawable and focus border is disabled
+   - **Added**: `FileChooserStyle` added `Drawable`: `contextMenuSelectedItem` - used to mark active item in context menu (by default `vis-radio-tick`)
+- **I18N Changes**:
+   - **FileChooser**: added keys `contextMenuSortBy`, `sortByName`, `sortByDate`, `sortBySize`, `sortByAscending`, `sortByDescending`
+- **Misc**: Disabling Android Lint is no longer necessary
+
+#### Version: 1.1.1 (LibGDX 1.9.3)
+- **Fixed**: NPE in FileChooser crash when navigating to other directory
+
 #### Version: 1.1.0 (LibGDX 1.9.3)
 - **API Moved**: `JNAFileDeleter` was moved to [vis-ui-contrib](https://github.com/kotcrab/vis-ui-contrib) project
 - **API Deprecated**: `FileChooser.setFavoritesPrefsName()` replaced by `FileChooser.setDefaultPrefsName()`
